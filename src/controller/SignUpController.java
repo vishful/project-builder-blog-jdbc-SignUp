@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import businesslogic.RegistrationValidation;
 import dao.UserDAO;
 import model.User;
 import utility.ConnectionManager;
@@ -41,8 +42,11 @@ public class SignUpController extends HttpServlet {
 		
 		// Fill your code here
 		
-		
-		if(checkUser!=0)
+		User user=new User();
+		UserDAO userdao=new UserDAO();
+		RegistrationValidation reg=new RegistrationValidation();
+		boolean checkUser=reg.checkUserDetails(email, password, confirmPassword);
+		if(checkUser!=false)
 		{
 						
 			System.out.println(user.getEmail());

@@ -37,9 +37,16 @@ public class LoginController extends HttpServlet {
 		String password = request.getParameter("password"); //  get the password value from the jsp/html page
 
 		// Fill your code
-		
-		boolean validateUser = userdao.loginUser(user);
-		if(validateUser) {
+		User user=new User();
+		UserDAO userdao=new UserDAO();
+		boolean validateUser;
+		try {
+			validateUser = userdao.loginUser(user);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(validateUser=true) {
 			RequestDispatcher rd=this.getServletContext().getRequestDispatcher("/WEB-INF/views/blogView.jsp");
 			rd.forward(request, response);
 		}else
